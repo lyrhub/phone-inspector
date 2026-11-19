@@ -506,7 +506,14 @@ public final class DeviceInspector {
                     for (InetAddress address : link.getDnsServers()) dns.add(address.getHostAddress());
                     return join(dns);
                 });
-                item(v, "MTU", () -> link.getMtu() > 0 ? link.getMtu() + " B" : "系统未提供有效值");
+                if (Build.VERSION.SDK_INT >= 29) {
+                    item(v, "MTU", () -> {
+                        int mtu = link.getMtu();
+                        return mtu > 0 ? mtu + " B" : "系统未提供有效值";
+                    });
+                } else {
+                    note(v, "MTU", "系统限制：Android 10 / API 29 以下无公开查询接口");
+                }
                 if (Build.VERSION.SDK_INT >= 28) {
                     item(v, "私有 DNS 是否激活", () -> link.isPrivateDnsActive() ? "是" : "否");
                     item(v, "私有 DNS 名称", link::getPrivateDnsServerName);

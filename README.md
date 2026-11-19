@@ -98,7 +98,8 @@ phone-inspector/
 │       │   └── DeviceInspector.java # 参数采集与报告
 │       └── res/
 │           ├── drawable/ic_launcher.xml
-│           └── values/{strings,styles}.xml
+│           ├── values/{strings,styles}.xml
+│           └── values-v27/styles.xml # Android 8.1+ 导航栏主题
 └── README.md
 ```
 
